@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerCarve - Your Career Journey Starts Here</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: #f8fafc;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 20px 20px 30px 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50px) translateY(-50px); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .greeting {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .user-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .search-bar {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            padding: 12px 20px;
+            color: white;
+            width: 100%;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Quick Stats */
+        .stats-section {
+            padding: 20px;
+            margin-top: -15px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #6366f1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Main Actions */
+        .actions-section {
+            padding: 0 20px 25px 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .action-card:hover::before {
+            opacity: 1;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .action-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .action-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #1e293b;
+        }
+
+        .action-subtitle {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            padding: 0 20px 25px 20px;
+        }
+
+        .featured-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .featured-card:hover {
+            transform: scale(1.02);
+        }
+
+        .featured-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .featured-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .featured-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 414px;
+            max-width: 414px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            padding: 8px 5px;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-item.active {
+            background: #f1f5f9;
+            color: #6366f1;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Coming Soon Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 300px;
+            margin: 20px;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .modal-text {
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-button {
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-button:hover {
+            background: #5b5bd6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 414px) {
+            .mobile-container {
+                max-width: 100%;
+            }
+            
+            .bottom-nav {
+                width: 100%;
+                left: 0;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <div class="greeting">Good morning! 👋</div>
+                <div class="user-name">Ready to grow your career?</div>
+                <input type="text" class="search-bar" placeholder="🔍 Search opportunities, skills...">
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card" onclick="showComingSoon()">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Active Applications</div>
+                </div>
+                <div class="stat-card" onclick="showComingSoon()">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Profile Complete</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Actions -->
+        <div class="actions-section">
+            <h2 class="section-title">Quick Actions</h2>
+            <div class="action-grid">
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">💼</span>
+                    <div class="action-title">Find Jobs</div>
+                    <div class="action-subtitle">Discover opportunities that match your skills</div>
+                </a>
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">📚</span>
+                    <div class="action-title">Skill Builder</div>
+                    <div class="action-subtitle">Learn new skills to advance your career</div>
+                </a>
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">🎯</span>
+                    <div class="action-title">Career Coach</div>
+                    <div class="action-subtitle">Get personalized career guidance</div>
+                </a>
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">🤝</span>
+                    <div class="action-title">Network</div>
+                    <div class="action-subtitle">Connect with industry professionals</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Featured Section -->
+        <div class="featured-section">
+            <h2 class="section-title">Featured</h2>
+            <a href="#" class="featured-card" onclick="showComingSoon(); return false;">
+                <div class="featured-badge">⭐ Premium</div>
+                <div class="featured-title">AI Resume Builder</div>
+                <div class="featured-subtitle">Create a winning resume with AI-powered insights and templates</div>
+            </a>
+        </div>
+
+        <!-- More Actions -->
+        <div class="actions-section">
+            <h2 class="section-title">Explore More</h2>
+            <div class="action-grid">
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">📊</span>
+                    <div class="action-title">Analytics</div>
+                    <div class="action-subtitle">Track your career progress</div>
+                </a>
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">💬</span>
+                    <div class="action-title">Interviews</div>
+                    <div class="action-subtitle">Practice with AI mock interviews</div>
+                </a>
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">🏆</span>
+                    <div class="action-title">Achievements</div>
+                    <div class="action-subtitle">Showcase your accomplishments</div>
+                </a>
+                <a href="#" class="action-card" onclick="showComingSoon(); return false;">
+                    <span class="action-icon">⚙️</span>
+                    <div class="action-title">Settings</div>
+                    <div class="action-subtitle">Customize your experience</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="#" class="nav-item active" onclick="showComingSoon(); return false;">
+                <span class="nav-icon">🏠</span>
+                <div class="nav-label">Home</div>
+            </a>
+            <a href="#" class="nav-item" onclick="showComingSoon(); return false;">
+                <span class="nav-icon">🔍</span>
+                <div class="nav-label">Explore</div>
+            </a>
+            <a href="#" class="nav-item" onclick="showComingSoon(); return false;">
+                <span class="nav-icon">📱</span>
+                <div class="nav-label">Messages</div>
+            </a>
+            <a href="#" class="nav-item" onclick="showComingSoon(); return false;">
+                <span class="nav-icon">👤</span>
+                <div class="nav-label">Profile</div>
+            </a>
+        </div>
+
+        <!-- Coming Soon Modal -->
+        <div class="modal" id="comingSoonModal">
+            <div class="modal-content">
+                <div class="modal-icon">🚀</div>
+                <div class="modal-title">Coming Soon!</div>
+                <div class="modal-text">This feature is currently under development. Stay tuned for exciting updates!</div>
+                <button class="modal-button" onclick="hideComingSoon()">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showComingSoon() {
+            const modal = document.getElementById('comingSoonModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideComingSoon() {
+            const modal = document.getElementById('comingSoonModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideComingSoon();
+            }
+        });
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stats on load
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                stat.textContent = '0';
+                let current = 0;
+                const increment = finalValue.includes('%') ? 1 : 1;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (finalValue.includes('%')) {
+                        stat.textContent = current + '%';
+                        if (current >= parseInt(finalValue)) {
+                            stat.textContent = finalValue;
+                            clearInterval(timer);
+                        }
+                    } else {
+                        stat.textContent = current;
+                        if (current >= parseInt(finalValue)) {
+                            stat.textContent = finalValue;
+                            clearInterval(timer);
+                        }
+                    }
+                }, 50);
+            });
+
+            // Add touch feedback for mobile
+            const touchElements = document.querySelectorAll('.action-card, .stat-card, .featured-card, .nav-item');
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                element.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+
+        // Dynamic greeting based on time
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            const greetingElement = document.querySelector('.greeting');
+            
+            if (hour < 12) {
+                greetingElement.textContent = 'Good morning! 🌅';
+            } else if (hour < 17) {
+                greetingElement.textContent = 'Good afternoon! ☀️';
+            } else {
+                greetingElement.textContent = 'Good evening! 🌙';
+            }
+        }
+
+        updateGreeting();
+    </script>
+</body>
+</html>
